@@ -1,11 +1,29 @@
-/* 
+.task-delete-icon {
+    visibility: hidden;
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity 500ms ease-out;
+}
 
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
+.task-item:hover .task-delete-icon {
+    visibility: visible;
+    opacity: 1;
+}
 
-*/
+@media screen and (min-width: 1000px) {
+    .w-control {
+        width: 25%;
+    }
+}
+
+@media screen and (min-width: 576px) and (max-width: 1000px) {
+    .w-control {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .w-control {
+        width: 75%;
+    }
+}
