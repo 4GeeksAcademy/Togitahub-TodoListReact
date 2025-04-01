@@ -6,29 +6,29 @@ import TaskList from "./TaskList";
 function App() {
 	const [tasks, setTasks] = useState([]);
 
-	// async function addNewUser(newUser) {
-	// 	try {
-	// 		const response = await fetch(
-	// 			`https://playground.4geeks.com/todo/users/${newUser}`,
-	// 			{
-	// 				method: "POST",
-	// 				headers: {
-	// 					"Content-Type": "application/json",
-	// 				},
-	// 				body: JSON.stringify(),
-	// 			}
-	// 		);
-	// 		if (!response.ok) {
-	// 			throw new Error(`Error: ${response.status}`);
-	// 		}
-	// 		const user = await response.json();
-	// 		console.log(`Se creo el usuario ${user} con exito`);
-	// 	} catch (error) {
-	// 		console.error("Error al agregar el usuario", error);
-	// 	}
-	// }
+	async function addNewUser(newUser) {
+		try {
+			const response = await fetch(
+				`https://playground.4geeks.com/todo/users/${newUser}`,
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(),
+				}
+			);
+			if (!response.ok) {
+				throw new Error(`Error: ${response.status}`);
+			}
+			const user = await response.json();
+			console.log(`Se creo el usuario ${user} con exito`);
+		} catch (error) {
+			console.error("Error al agregar el usuario", error);
+		}
+	}
 
-	// addNewUser("oscar");
+	addNewUser("oscar");
 
 	async function showOscarsTasks() {
 		try {
