@@ -18,17 +18,12 @@ function App() {
 					body: JSON.stringify(),
 				}
 			);
-			if (!response.ok) {
-				throw new Error(`Error: ${response.status}`);
-			}
 			const user = await response.json();
-			console.log(`Se creo el usuario ${user} con exito`);
+			console.log(`Se creo el usuario con exito`);
 		} catch (error) {
 			console.error("Error al agregar el usuario", error);
 		}
 	}
-
-	addNewUser("oscar");
 
 	async function showOscarsTasks() {
 		try {
@@ -48,6 +43,7 @@ function App() {
 	}
 
 	useEffect(() => {
+		addNewUser("oscar");
 		showOscarsTasks();
 	}, []);
 
