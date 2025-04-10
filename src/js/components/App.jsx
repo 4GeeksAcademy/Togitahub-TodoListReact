@@ -6,24 +6,36 @@ import TaskList from "./TaskList";
 function App() {
 	const [tasks, setTasks] = useState([]);
 
-	async function addNewUser(newUser) {
-		try {
-			const response = await fetch(
-				`https://playground.4geeks.com/todo/users/${newUser}`,
-				{
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify(),
+	useEffect(() => {
+		const checkAndCreateUser = async () => {
+			const username = "oscar";
+			try {
+				const response = await fetch(`https://playground.4geeks.com/todo/users/${username}`);
+				if (response.ok) {
+					console.log(`El usuario '${username}' ya existe.`);
+				} else if (response.status === 404) {
+					const createResponse = await fetch(`https://playground.4geeks.com/todo/users/${username}`, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({}),
+					});
+					if (createResponse.ok) {
+						console.log(`Usuario '${username}' creado exitosamente.`);
+					} else {
+						console.error(`Error al crear el usuario '${username}': ${createResponse.statusText}`);
+					}
+				} else {
+					console.error(`Error al verificar el usuario '${username}': ${response.statusText}`);
 				}
-			);
-			const user = await response.json();
-			console.log(`Se creo el usuario con exito`);
-		} catch (error) {
-			console.error("Error al agregar el usuario", error);
-		}
-	}
+			} catch (error) {
+				console.error(`Error en la solicitud: ${error.message}`);
+			}
+		};
+
+		checkAndCreateUser();
+	}, []);
 
 	async function showOscarsTasks() {
 		try {
@@ -43,7 +55,6 @@ function App() {
 	}
 
 	useEffect(() => {
-		addNewUser("oscar");
 		showOscarsTasks();
 	}, []);
 
